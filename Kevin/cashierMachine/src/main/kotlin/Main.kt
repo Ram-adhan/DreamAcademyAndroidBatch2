@@ -3,7 +3,11 @@ import java.util.Scanner
 var listMakan = mutableListOf("Nasi", "Sate", "Wagyu")
 var listHarga = mutableListOf(30000, 20000, 500000)
 var reqMakan = mutableListOf<String>()
+var totalMakan = mutableMapOf<String, Int>()
+var ammount = 0
 var sum = 0
+var price = 0
+var total = 0
 
 fun main(){
     mainMenu()
@@ -12,14 +16,14 @@ fun main(){
 fun mainMenu(){
     println("""
         **********************************
-        -------------MAIN MENU------------
+        ------------ MAIN MENU -----------
         **********************************
         1. Tampilkan Menu
         2. Tambahkan Menu
         3. Penjualan Makanan
         4. Keluar Program
         **********************************
-        ----------------------------------
+        ------- Pilih Angka (1-4) --------
         **********************************
     """.trimIndent())
 
@@ -39,15 +43,15 @@ fun tampilMenu(){
     fun panggilMenu(): String{
         for(indx in listMakan.indices){
             println("""
-                ${listMakan[indx].padEnd(18)} Rp.${listHarga[indx]}
+                ${listMakan[indx].padEnd(18).capitalize()} Rp.${listHarga[indx]}
             """.trimIndent())
         }
-    return ("")
+        return ("")
     }
 
     println("""
         **********************************
-        -----------MENU MAKANAN-----------
+        ---------- MENU MAKANAN ----------
         **********************************
         Nama Makanan    |     Harga  
         
@@ -73,9 +77,18 @@ fun nambahMenu(){
         **********************************
         Masukkan makanan: 
     """.trimIndent())
-    val input: String? = readLine()
-    val tambahanMenu = input
-    listMakan += "${tambahanMenu}"
+    val input: String? = readLine()?.toLowerCase()
+    if (input != null) {
+        if (input.let { kapitalis(it) } in listMakan){
+            println("""
+                Makanan Sudah Ada
+            """.trimIndent())
+            nambahMenu()
+        } else{
+            listMakan.add(kapitalis(input))
+        }
+    }
+
 
     print("""
         **********************************
@@ -87,13 +100,16 @@ fun nambahMenu(){
 
 
     println("""
-        MAKANAN BERHASIL DITAMBAHKAN
+        **********************************
+           MAKANAN BERHASIL DITAMBAHKAN
+        **********************************
         
         0. Main Menu
         1. Tampilkan Menu
         2. Tambah makanan lagi
         3. Penjualan makanan
         
+        ----------------------------------
         Masukkan angka: 
     """.trimIndent())
     val userIn: Int = Integer.valueOf(readLine())
@@ -108,7 +124,7 @@ fun nambahMenu(){
 fun jualMenu(){
     println("""
         **********************************
-        ------PENGEN MAKAN APA KAU??------
+        ----- PENGEN MAKAN APA KAU?? -----
         **********************************
     """.trimIndent())
 
@@ -116,32 +132,34 @@ fun jualMenu(){
         Makanan yang dipilih: 
     """.trimIndent())
 
-    val input: String? = readLine()
-    val tambahanMenu = input?.split(" ")
-    reqMakan += "${tambahanMenu}"
-
-//    val input: String? = readLine()
-//    val reqMakan: List<String>? = input?.split(",")
-//    orderMenu += "${reqMakan}"
-//    println(orderMenu)
+    val input: String? = readLine()?.toLowerCase()
+    if (input != null) {
+        reqMakan.add(kapitalis(input))
+    }
+    if (input?.let { kapitalis(it) } in reqMakan){
+        ammount ++
+    }
+//    else{
+//        ammount = 0
+//    }
 
     fun showBill(){
+        val strukMakan = reqMakan.distinct()
         fun panggilPesan(): String{
-            if (reqMakan != null) {
-                for(indx in reqMakan.indices){
-                    println("""
-                        ${reqMakan[indx].padEnd(18)} Rp.${listHarga.get(listMakan.indexOf(reqMakan[indx]))}
-                    """.trimIndent())
-                }
+            for(indx in strukMakan.indices){
+                price = listHarga.get(listMakan.indexOf(strukMakan[indx])) * ammount
+                println("""
+                    ${strukMakan[indx].padEnd(20).capitalize()} ${ammount.toString().padEnd(9)} Rp.$price
+                """.trimIndent())
             }
             return(" ")
         }
 
         println("""
-            **********************************
-            --------STRUK MAKANAN KAU---------
-            **********************************
-            Nama Makanan     |    Harga
+            *****************************************
+            ----------- INGPO MAKANAN KAU -----------
+            *****************************************
+            Nama Makanan    |   Total   |     Harga
                 
         """.trimIndent())
 
@@ -150,45 +168,54 @@ fun jualMenu(){
         """.trimIndent())
 
         println("""
-            ----------------------------------
-            Total Harga: $sum
+            -----------------------------------------
+            Total Harga: Rp.$total
         """.trimIndent())
 
         mainMenu()
 
     }
 
-    if(reqMakan != null){
-        for(indx in reqMakan.indices){
-            when (reqMakan[indx]){
-                in listMakan -> listHarga.get(listMakan.indexOf(reqMakan[indx]))
-                else -> println("Makanan Tidak ada BLOK")
-            }
-            sum += listHarga.get(listMakan.indexOf(reqMakan[indx]))
+    for(indx in reqMakan.indices){
+        if (reqMakan[indx] in listMakan){
+            listHarga.get(listMakan.indexOf(reqMakan[indx]))
+        }else {
+            println("Makanan Tidak ada")
+            jualMenu()
         }
+        sum = listHarga.get(listMakan.indexOf(reqMakan[indx]))
     }
+    total += sum
+
     println("""
         Mau makan lagi? (Y/N)
         """.trimIndent())
 
-    val input1: String? = readLine()
-    val req = input1
-    if(req == "Y"){
+    val input1: String? = readLine()?.toUpperCase()
+    if (input1 == "Y") {
         jualMenu()
-    }
-    else if(req == "N")(
+    } else if (input1 == "N") (
             showBill()
             )
-    else{
-        println("""
+    else {
+        println(
+            """
             Input Tidak Valid
-            """.trimIndent())
+            """.trimIndent()
+        )
     }
 
 }
 
 fun keluarProgram(){
     println("""
-        BELI DOANG MAKAN KAGAK
+       ***********************************
+       ----- BELI DOANG MAKAN KAGAK ------
     """.trimIndent())
+}
+
+fun kapitalis(str: String): String {
+    return str.trim().split("\\s+".toRegex())
+        .map{ it.capitalize() }
+        .joinToString (" ")
 }
