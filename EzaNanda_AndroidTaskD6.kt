@@ -2,6 +2,7 @@ var makanan = mutableListOf<String>("Steak", "Spaghetti", "Burger")
 var harga = mutableListOf<Int>(50000,20000,15000)
 var num = mutableListOf<String>("1","2","3")
 var total = 0
+var amount = 0
 
 fun main() {
     Menu()
@@ -39,7 +40,16 @@ fun LihatMenu(){
        ${num[i]}. ${makanan[i].padEnd(10)}   Rp.${harga[i]}
     """.trimIndent())
     }
-    Menu()
+    print("Balik ke Menu(Y/N) : ")
+    val jikaInput: String? = readLine()
+    if (jikaInput == "Y"){
+        Menu()
+    } else if (jikaInput == "y"){
+        Menu()
+    } else {
+        Keluar()
+    }
+
     print("Input Menu: ")
     val input: Int? = readLine()!!.toInt()
 
@@ -107,9 +117,7 @@ fun Penjualan(){
                     else -> "Nomer tidak ada"
                 }
                 total += harga.get(num.indexOf(reqMakan[i]))
-//                println(":Total 2 $total")
-
-//            total += listharga.get(listmakanan.indexof("$input"))
+                amount += num.get(num.indexOf(reqMakan[i])).count()
             }
             print("Y/N: ")
             val inputReq: String? = readLine()
@@ -122,11 +130,43 @@ fun Penjualan(){
                 Penjualan()
             }
             else {
-                println("Total Harga : $total")
+                strukBill()
             }
-    }
-}
 
+    }
+
+}
+//var reqMak = TambahMenu()
+
+fun strukBill(){
+//    var strukMakan = reqMak.distinct()
+    fun struk (): String {
+        for (i in makanan.indices) {
+
+            println("""
+                ${makanan[i].padEnd(10)}| $amount  | Rp.${harga[i]}
+            """.trimIndent())
+        }
+        return(" ")
+    }
+
+    println("""
+                ==========================================================
+                Nama Makanan              | Jumlah        | Harga
+                ==========================================================
+    """.trimIndent())
+
+    println("""
+        ${struk()}
+    """.trimIndent())
+
+    println("""
+                ==========================================================
+                Total Harga : $total
+    """.trimIndent())
+
+
+}
 
 fun Keluar(){
     println("""
