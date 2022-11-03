@@ -1,29 +1,40 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 var daftar_Makanan = mutableListOf("nasi gorEng","baKmi bASAH", "goreNgan")
 =======
 var daftar_Makanan = mutableListOf("nasi goreng","bakmi basah", "gorengan")
 >>>>>>> a01f271 (Third Commit)
+=======
+var daftar_Makanan = mutableListOf("nasi goreng","bakmi basah", "gorengan")
+>>>>>>> origin/main
 var daftar_Harga = mutableListOf(100,150,200)
 var jumlah_Pesanan2 = mutableListOf(0)
 var makanan_Dipesan = mutableListOf("kosong")
 var harga_Dipesan = mutableListOf(300)
+<<<<<<< HEAD
 <<<<<<< HEAD
 var makanan_Beda = false
 var persetujuan_Update_Makanan = 0
 var total_Semua = 0
 var user_memesan = 0
 =======
+=======
+>>>>>>> origin/main
 var cek_Makanan_sudah_Ada = false
 var persetujuan_Update_Makanan = 0
 var total_Semua = 0
 var pesanan_Pertama = 0
 // simpan menu dan harga pada list, map, atau key -> value
+<<<<<<< HEAD
 >>>>>>> a01f271 (Third Commit)
+=======
+>>>>>>> origin/main
 
 fun main() {
     makanan_Dipesan.removeAt(0)
     harga_Dipesan.removeAt(0)
     jumlah_Pesanan2.removeAt(0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     halaman_Utama()
@@ -119,6 +130,8 @@ fun penjualan () {
             var kata_Kecil2 = daftar_Makanan[i].lowercase()
             var kapital = kata_Kecil2.split(" ").toTypedArray()
 =======
+=======
+>>>>>>> origin/main
     halaman_Utama()
 //    lihat_menu()
 //    tambah_Makanan()
@@ -221,13 +234,17 @@ fun penjualan () {
         for (i in 0.. daftar_Makanan.size - 1) {
             //      validasi kapital di setiap kata
             var kapital = daftar_Makanan[i].split(" ").toTypedArray()
+<<<<<<< HEAD
 >>>>>>> a01f271 (Third Commit)
+=======
+>>>>>>> origin/main
             if (kapital.size > 1) {
                 print("${i+1}".padEnd (4))
                 for (j in 0..kapital.size) {
                     if (j < kapital.size) {
                         print(kapital[j].capitalize() + " ")
                     } else {
+<<<<<<< HEAD
 <<<<<<< HEAD
                         println("\t\t" + "Rp. " + daftar_Harga[i])
                     }
@@ -271,6 +288,8 @@ fun penjualan () {
             }
         }
 =======
+=======
+>>>>>>> origin/main
                         println("".padEnd(20) + "Rp. " + daftar_Harga[i])
                     }
                 }
@@ -311,11 +330,15 @@ fun penjualan () {
 //            jumlah_Pesanan2.add(1)
 //        }
     }
+<<<<<<< HEAD
 >>>>>>> a01f271 (Third Commit)
+=======
+>>>>>>> origin/main
         println("Apakah anda ingin menambah pesanan ?")
         println("1. Ya\t\t 2. Tidak\t[1 - 2]")
         var input2 = readLine()!!.toInt()
     }while(input2 == 1)
+<<<<<<< HEAD
 <<<<<<< HEAD
     //                  STRUK PESANAN
     println("==================Struk Pesanan=====================")
@@ -333,23 +356,32 @@ fun penjualan () {
         var subtotal = harga_Dipesan[i] * jumlah_Pesanan2[i]
         println("\tRp." + harga_Dipesan[i] +"\t\t\t" + jumlah_Pesanan2[i] + "\t\t" + subtotal)
 =======
+=======
+>>>>>>> origin/main
     //                  STRUK PEMESANAN
     println("==================Struk Pesanan=====================")
     println("Menu".padEnd(30) + "Harga".padEnd(20) + "Jumlah")
     for (i in makanan_Dipesan.indices) {
 
         println(makanan_Dipesan[i].padEnd(30) + "Rp. " + harga_Dipesan[i] +"".padEnd(15) + jumlah_Pesanan2[i])
+<<<<<<< HEAD
 >>>>>>> a01f271 (Third Commit)
+=======
+>>>>>>> origin/main
     }
     println("====================================================")
     for (i in makanan_Dipesan.indices){
         var total1 = harga_Dipesan[i] * jumlah_Pesanan2[i]
+<<<<<<< HEAD
 <<<<<<< HEAD
 //        println(total1)
         total_Semua = total_Semua + total1
 =======
         total_Semua =+ total1
 >>>>>>> a01f271 (Third Commit)
+=======
+        total_Semua =+ total1
+>>>>>>> origin/main
     }
     println("Jumlah Belanja : ".padEnd(30) + "Rp. " + total_Semua )
     print("Tekan enter untuk kembali ke menu utama...")
@@ -357,16 +389,22 @@ fun penjualan () {
     halaman_Utama()
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 fun keluar () {
     println("Terima kasih atas kunjungannya.")
 }
 
 
 =======
+=======
+>>>>>>> origin/main
     fun keluar () {
     println("Terima kasih atas kunjungannya.")
     }
 
 
 var exit = false
+<<<<<<< HEAD
 >>>>>>> a01f271 (Third Commit)
+=======
+>>>>>>> origin/main
