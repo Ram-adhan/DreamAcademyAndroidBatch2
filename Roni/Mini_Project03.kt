@@ -171,9 +171,9 @@ fun penjualan () {
         println("\tRp." + harga_Dipesan[i] +"\t\t\t" + jumlah_Pesanan2[i] + "\t\t" + subtotal)
     }
     println("====================================================")
+    total_Semua = 0
     for (i in makanan_Dipesan.indices){
         var total1 = harga_Dipesan[i] * jumlah_Pesanan2[i]
-//        println(total1)
         total_Semua = total_Semua + total1
     }
     println("Jumlah Belanja : ".padEnd(30) + "Rp. " + total_Semua )
