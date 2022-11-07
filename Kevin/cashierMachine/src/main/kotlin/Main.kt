@@ -143,39 +143,6 @@ fun jualMenu(){
 //        ammount = 0
 //    }
 
-    fun showBill(){
-        val strukMakan = reqMakan.distinct()
-        fun panggilPesan(): String{
-            for(indx in strukMakan.indices){
-                price = listHarga.get(listMakan.indexOf(strukMakan[indx])) * ammount
-                println("""
-                    ${strukMakan[indx].padEnd(20).capitalize()} ${ammount.toString().padEnd(9)} Rp.$price
-                """.trimIndent())
-            }
-            return(" ")
-        }
-
-        println("""
-            *****************************************
-            ----------- INGPO MAKANAN KAU -----------
-            *****************************************
-            Nama Makanan    |   Total   |     Harga
-                
-        """.trimIndent())
-
-        println("""
-            ${panggilPesan()}
-        """.trimIndent())
-
-        println("""
-            -----------------------------------------
-            Total Harga: Rp.$total
-        """.trimIndent())
-
-        mainMenu()
-
-    }
-
     for(indx in reqMakan.indices){
         if (reqMakan[indx] in listMakan){
             listHarga.get(listMakan.indexOf(reqMakan[indx]))
@@ -214,8 +181,42 @@ fun keluarProgram(){
     """.trimIndent())
 }
 
+fun showBill(){
+    val strukMakan = reqMakan.distinct()
+    fun panggilPesan(): String{
+        for(indx in strukMakan.indices){
+            price = listHarga.get(listMakan.indexOf(strukMakan[indx])) * ammount
+            println("""
+                    ${strukMakan[indx].padEnd(20).capitalize()} ${ammount.toString().padEnd(9)} Rp.$price
+                """.trimIndent())
+        }
+        return(" ")
+    }
+
+    println("""
+            *****************************************
+            ----------- INGPO MAKANAN KAU -----------
+            *****************************************
+            Nama Makanan    |   Total   |     Harga
+                
+        """.trimIndent())
+
+    println("""
+            ${panggilPesan()}
+        """.trimIndent())
+
+    println("""
+            -----------------------------------------
+            Total Harga: Rp.$total
+        """.trimIndent())
+
+    mainMenu()
+
+}
+
 fun kapitalis(str: String): String {
     return str.trim().split("\\s+".toRegex())
         .map{ it.capitalize() }
         .joinToString (" ")
 }
+fun String.kapital(): String = trim().split(" ").map{it.capitalize()}.joinToString(" ")
