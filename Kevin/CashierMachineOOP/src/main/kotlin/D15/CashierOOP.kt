@@ -5,7 +5,7 @@ var listMakan = mutableListOf("Nasi", "Sate", "Wagyu")
 var listHarga = mutableListOf(30000, 20000, 500000)
 var totalMakan = mutableMapOf<String, Int>()
 
-fun main(){
+fun cashier(){
     mainMenu()
 }
 
