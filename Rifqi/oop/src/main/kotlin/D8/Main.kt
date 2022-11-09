@@ -1,9 +1,17 @@
-fun main(args: Array<String>) {
-    val makanan = Food("Ayam Goreng")
-    makanan.updatePrice(1000)
-    makanan.price = 100000
-    println(makanan.toString())
+package D8
 
-    val makanan2 = Food("Pizza", 12000)
-    println(makanan2.toString())
+import java.util.*
+fun main(){
+    MesinKasir().mainRslt()
+
+}
+
+
+fun String.kapitalis(): String {
+    return split(" ")
+        .map {
+            val first = it[0].uppercase()
+            first + it.substring(1)
+        }
+        .joinToString(" ")
 }

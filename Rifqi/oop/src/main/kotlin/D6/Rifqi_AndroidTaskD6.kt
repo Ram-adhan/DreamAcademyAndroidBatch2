@@ -18,7 +18,7 @@ fun pilihan(){
         println("|_____________________________|_________|")
         println("| 1. List Makanan             |         |")
         println("| 2. Tambah Produk            |         |")
-        println("| 3. Keluar                   |         |")
+        println("| 3. D8.Keluar                   |         |")
         println("|_____________________________|_________|")
     }
 
@@ -82,44 +82,44 @@ fun listMakanan(){
             menu = " Mie Tante "
             harga = harga + harga_item[0] * jumlah
             total = harga_item[0] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 2) {
             menu = "Mie Telur "
             harga = harga + harga_item[1] * jumlah
             total = harga_item[1] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 3) {
             menu = " Nasi Omlet "
             harga = harga + harga_item[2] * jumlah
             total = harga_item[2] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 4) {
             menu = " Nasi Orak Arik "
             harga = harga + harga_item[3] * jumlah
             total = harga_item[3] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 5) {
             menu = " Magelangan "
             harga = harga + harga_item[4] * jumlah
             total = harga_item[4] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 6) {
             menu = " Nasi Ayam Goreng "
             harga = harga + harga_item[5] * jumlah
             total = harga_item[5] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 7) {
             menu = " Es teh Manis "
             harga = harga + harga_item[6] * jumlah
             total = harga_item[6] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         } else if (input_item == 8) {
             menu = " Teh Tawar "
             harga = harga + harga_item[7] * jumlah
             total = harga_item[7] * jumlah
-            println("Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
+            println("D8.Menu Pesanan Anda : $menu    x$jumlah   |  Rp. $total")
         }else {
-            println("Menu yang anda pilih belum tersedia.")
+            println("D8.Menu yang anda pilih belum tersedia.")
         }
         println("Apakah anda mau memesan lagi? Y/T")
         a = input.next()
