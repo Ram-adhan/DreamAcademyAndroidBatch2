@@ -1,11 +1,11 @@
 package D8
 
 import java.util.*
+import MesinKasir
 fun main(){
     MesinKasir().mainRslt()
 
 }
-
 
 fun String.kapitalis(): String {
     return split(" ")
