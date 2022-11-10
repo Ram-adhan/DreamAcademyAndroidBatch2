@@ -1,7 +1,7 @@
 class MesinKasir {
 
     val dataBase = DatabaseMakanan()
-//    val struk = Receipt()
+    val struk = Receipt()
 
     fun mainMenu(){
         println("""
@@ -24,7 +24,10 @@ class MesinKasir {
         when (userIn){
             1 -> tampilMenu()
             2 -> tambahMenu()
-//            3 -> struk.jualMenu()
+            3 -> {
+                struk.dataMakanan = dataBase.listMenu
+                struk.jualMenu()
+            }
             4 -> keluarProgram()
         }
     }
@@ -76,7 +79,10 @@ class MesinKasir {
             0 -> mainMenu()
             1 -> tampilMenu()
             2 -> dataBase.nambahMenu()
-//            3 -> struk.jualMenu()
+            3 -> {
+                struk.dataMakanan = dataBase.listMenu
+                struk.jualMenu()
+            }
         }
     }
 
