@@ -1,13 +1,7 @@
 class MesinKasir {
-    val show = ShowMenu()
-    val add = AddFood()
-    val sell = SellFood()
 
-    val dataMakanan = mutableListOf(
-        Makanan("Ayam", 20000),
-        Makanan("Wagyu", 300000),
-        Makanan("Nasi Padang", 25000)
-    )
+    val dataBase = DatabaseMakanan()
+//    val struk = Receipt()
 
     fun mainMenu(){
         println("""
@@ -30,7 +24,7 @@ class MesinKasir {
         when (userIn){
             1 -> tampilMenu()
             2 -> tambahMenu()
-            3 -> sell.jualMenu()
+//            3 -> struk.jualMenu()
             4 -> keluarProgram()
         }
     }
@@ -45,7 +39,7 @@ class MesinKasir {
         
     """.trimIndent())
         println("""
-        ${show.panggilMenu()}
+        ${dataBase.panggilMenu()}
     """.trimIndent())
         println("""
         **********************************
@@ -62,7 +56,7 @@ class MesinKasir {
 
     fun tambahMenu(){
 
-        add.nambahMenu()
+        dataBase.nambahMenu()
 
         println("""
         **********************************
@@ -81,8 +75,8 @@ class MesinKasir {
         when (userIn){
             0 -> mainMenu()
             1 -> tampilMenu()
-            2 -> add.nambahMenu()
-            3 -> sell.jualMenu()
+            2 -> dataBase.nambahMenu()
+//            3 -> struk.jualMenu()
         }
     }
 
