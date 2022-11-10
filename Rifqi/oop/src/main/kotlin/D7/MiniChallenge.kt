@@ -22,7 +22,7 @@
 //         ---------------------------------
 //        | 1. Tampilkan D8.Menu              |
 //        | 2. Tambahkan D8.Menu              |
-//        | 3. Pemesanan Makanan           |
+//        | 3. Pemesanan Makanan.kt           |
 //        | 4. D8.Keluar Program              |
 //         ---------------------------------
 //        |        Pilih Angka (1-4)       |
@@ -54,7 +54,7 @@
 //
 //
 //fun tampilkanMenu(){
-//    println("-- Menampilkan D8.Menu Makanan --")
+//    println("-- Menampilkan D8.Menu Makanan.kt --")
 //    println()
 //    fun listMenu() : String {
 //        for(a in listMkn.indices) {
@@ -67,7 +67,7 @@
 //         ---------------------------------
 //        |            LIST MENU           |
 //         ---------------------------------
-//        | Nama Makanan    |     Harga    |
+//        | Nama Makanan.kt    |     Harga    |
 //         ---------------------------------
 //
 //    """.trimIndent())
@@ -77,7 +77,7 @@
 //}
 //
 //fun tambahkanMenu(){
-//    println("-- Menambahkan Makanan --")
+//    println("-- Menambahkan Makanan.kt --")
 //    println()
 //
 //    print("Masukan menu yang ingin ditambahkan : ")
@@ -85,7 +85,7 @@
 //    if (input != null) {
 //        if (input.let { kapitalis(it) } in listMkn){
 //            println("""
-//                Makanan Sudah Ada
+//                Makanan.kt Sudah Ada
 //            """.trimIndent())
 //            tambahkanMenu()
 //        } else{
@@ -104,7 +104,7 @@
 //}
 //
 //fun pesan() {
-//    println("-- Pemesanan Makanan --")
+//    println("-- Pemesanan Makanan.kt --")
 //    println()
 //    println("NOTE : 1. Jika sebelumnya anda sudah menambahkan menu, menu tersebut belum dapat dipesan (menu yang paling bawah)")
 //    println("       2. Namun jika anda belum pernah menambahkan menu, maka semua menu yang ada tersedia")

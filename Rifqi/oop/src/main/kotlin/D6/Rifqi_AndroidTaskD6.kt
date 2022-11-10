@@ -16,7 +16,7 @@ fun pilihan(){
         println("_________________________________________")
         println("|          Pilihan            |         |")
         println("|_____________________________|_________|")
-        println("| 1. List Makanan             |         |")
+        println("| 1. List Makanan.kt             |         |")
         println("| 2. Tambah Produk            |         |")
         println("| 3. D8.Keluar                   |         |")
         println("|_____________________________|_________|")

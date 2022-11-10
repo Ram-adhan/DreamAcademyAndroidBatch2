@@ -14,8 +14,8 @@ class MesinKasir {
         do {
             println(
                 """    ***** MEWAH MURAH *****
-        1. Lihat Makanan
-        2. Tambah Makanan
+        1. Lihat Makanan.kt
+        2. Tambah Makanan.kt
         3. Penjualan
         4. Keluar
     ####################### 
@@ -43,7 +43,7 @@ class MesinKasir {
 
     fun tampilkanMenu(): Boolean{
         println("------------Daftar Menu---------------")
-        println("${"No.".padEnd(4)} | ${"Nama Makanan".padEnd(20)} | ${"Harga".padEnd(20)}")
+        println("${"No.".padEnd(4)} | ${"Nama Makanan.kt".padEnd(20)} | ${"Harga".padEnd(20)}")
 
         dataMakanan.forEach { makanan ->
             println("${makanan.id.toString().padEnd(4)} | ${makanan.name.kapitalis().padEnd(20)} | ${"Rp ${makanan.price}".padEnd(20)}")
@@ -54,7 +54,7 @@ class MesinKasir {
     }
 
     fun tambahkanMenu():Boolean{
-        println("------------Tambah Makanan---------------")
+        println("------------Tambah Makanan.kt---------------")
         print("Masukkan nama makanan: ")
 
         val namaMakanan = readLine() ?: ""
@@ -76,7 +76,7 @@ class MesinKasir {
 
 //    fun penjualan(): Boolean{
 //        tampilkanMenu()
-//        println("------------Masukkan Nama Makanan---------------")
+//        println("------------Masukkan Nama Makanan.kt---------------")
 //        val findMakanan = readLine() ?: ""
 //
 //        when {

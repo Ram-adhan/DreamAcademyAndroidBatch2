@@ -18,7 +18,7 @@ fun main() {
 fun halaman_Utama () {
     println("=====Selamat Datang Di Warung SukaMaju======")
     println("1. Lihat Menu")
-    println("2. Tambah Makanan ")
+    println("2. Tambah Makanan.kt ")
     println("3. Penjualan")
     println("4. Keluar")
     do {
@@ -67,7 +67,7 @@ fun tambah_Makanan () {
         var cek_Huruf_Kecil = daftar_Makanan.map { it.lowercase() }
         for (i in 0..cek_Huruf_Kecil.size - 1) {
             if (huruf_Kecil.equals(cek_Huruf_Kecil[i])) {
-                println("Makanan sudah ada. Apakah anda ingin memperbarui makanan yang sudah ada?")
+                println("Makanan.kt sudah ada. Apakah anda ingin memperbarui makanan yang sudah ada?")
                 println("1. Iya\t2. Tidak")
                 persetujuan_Update_Makanan = readLine()!!.toInt()
                 if (persetujuan_Update_Makanan == 1) {
