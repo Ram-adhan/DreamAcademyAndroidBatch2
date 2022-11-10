@@ -1,34 +1,17 @@
 /*
-var makanan = mutableListOf<String>("Steak", "Spaghetti", "Burger")
-var harga = mutableListOf<Int>(50000,20000,15000)
-var num = mutableListOf<String>("1","2","3")
-var totalMakanan = mutableMapOf<String, Int>()
-var total = 0
-var amount = 0
+import kotlin.system.exitProcess
 
-fun main() {
-    Menu()
-    mainMenu()
+var makanan = mutableMapOf<String, Int>("steak" to 50000, "spaghetti" to 20000, "burger" to 15000)
+var totalMakanan = mutableMapOf<Int, String>()
 
-}
 
-fun mainMenu(){
-    print("Input Menu: ")
-    val input: Int? = readLine()!!.toInt()
-
-    if (input != null) {
-        when (input){
-            1 -> LihatMenu()
-            2 -> TambahMenu()
-            3 -> Penjualan()
-            4 -> Keluar()
-        }
+fun pointOfSales() {
+    makanan.onEachIndexed { index, (keys) ->
+        totalMakanan[index + 1] = keys
     }
-}
-
-
-fun Menu() {
-    println("""
+    var exit = false
+    do {
+        println("""
         ***** MEWAH MURAH *****
             1. Lihat Menu
             2. Tambah Menu
@@ -36,170 +19,126 @@ fun Menu() {
             4. Keluar
         #######################
     """.trimIndent())
+        print("Input Menu(1-4): ")
+        val input: Int? = readLine()!!.toInt()
+
+        if (input != null) {
+            when (input){
+                1 -> LihatMenu()
+                2 -> TambahMenu()
+                3 -> Penjualan()
+                4 -> Keluar()
+            }
+        }
+    } while (!exit)
+
 
 }
 
-fun LihatMenu(){
-
-    for (i in makanan.indices) {
-        println(
-            """
-       ${num[i]}. ${makanan[i].padEnd(15)}   Rp.${harga[i]}
-    """.trimIndent())
+fun LihatMenu() :Boolean{
+    println("======================================")
+    println("============Daftar Menu===============")
+    println("\"${"No.".padEnd(4)} | ${"Nama Makanan".padEnd(20)} | ${"Harga".padEnd(20)}\"")
+    val code = totalMakanan.toList()
+    makanan.onEachIndexed { index, (namaMakanan, harga) ->
+        println("${code[index].first.toString().padEnd(4)} | ${namaMakanan.kapital().padEnd(20)} | ${"Rp $harga".padEnd(20)}")
     }
-    print("Balik ke Menu(Y/N) : ")
-    val jikaInput: String? = readLine()
-    if (jikaInput == "Y"){
-        Menu()
-    } else if (jikaInput == "y"){
-        Menu()
-        mainMenu()
+    println("======================================")
+    return false
+}
+
+fun String.kapital(): String {
+    return split(" ")
+        .map {
+            val first = it[0].uppercase()
+            first + it.substring(1)
+        }
+        .joinToString(" ")
+}
+
+fun TambahMenu():Boolean{
+
+    println("============Tambah Makanan===============")
+    print("Silahkan masukan nama makanan: ")
+    val inputMakanan = readLine()?: ""
+    if(inputMakanan.lowercase() in makanan.keys) {
+        print("Makanan sudah ada dimenu apakah ingin diperbarui harga (Y/N):")
+        val jawab = readLine()?: ""
+        if (jawab.lowercase() == "y"){
+            inputHarga(inputMakanan)
+            println("Harga berhasil diperbarui")
+        } else {
+            println("Baiklah")
+        }
     } else {
-        Keluar()
+        inputHarga(inputMakanan)
+        totalMakanan[totalMakanan.keys.last()+1] = inputMakanan
+        println("Makanan berhasil ditambahkan")
     }
-//    ${num[i]}. ${makanan[i]}  Rp.${harga[i]}
-
-}
-fun capitalize(str: String): String {
-    return str.trim().split("\\s+".toRegex())
-        .map { it.capitalize() }.joinToString(" ")
-
+    println(",Kembali ke menu")
+    return false
 }
 
-fun TambahMenu(){
-    print("Masukan Nomer Makanan: ")
-    val inputNum: String? = readLine()
-    print("Nama Makanan         : ")
-    val inputMenu: String? = readLine()?.lowercase()
-    print("Masukan Harga        : ")
-    val inputHarga = readLine()!!.toInt()
-
-
-
-    if (inputMenu != null) {
-        if (inputNum in num){
-            if (inputNum != null) {
-                num.set(inputNum.toInt()-1,inputNum)
-                makanan.set(inputNum.toInt()-1,capitalize(inputMenu))
-                harga.set(inputNum.toInt()-1,inputHarga)
-            }
-        }
-        else {
-            if (inputNum != null) {
-                num.add(inputNum)
-            }
-            makanan.add(capitalize(inputMenu))
-            harga.add(inputHarga)
-        }
-
-    }
-    Menu()
-    print("Input Menu: ")
-    val input: Int? = readLine()!!.toInt()
-
-    if (input != null) {
-        when (input){
-            1 -> LihatMenu()
-            2 -> TambahMenu()
-            3 -> Penjualan()
-            4 -> Keluar()
-        }
-    }
-}
-
-fun Penjualan(){
-
-    for (i in makanan.indices) {
-        println("${num[i]}. ${makanan[i].padEnd(10)}   Rp.${harga[i]}") }
-    print("Masukan Nomer Makanan : ")
-    val input: String? = readLine()
-    val reqMakan : List<String>? = input?.split(",")
-    for (indx in makanan.indices){
-        totalMakanan[num.get(indx)] = 0
-    }
-//    val makan : List<String>? = reqMakan
-    println("Makanan | Jumlah Pesanan | Subtotal")
-    for (makan in totalMakanan.keys){
-        val indexMakan = num.indexOf(makan)
-        val harga = harga[indexMakan]
-        val jumlahPesanan = try {
-            totalMakanan.getValue(makan)
-        } catch (e: NoSuchElementException){
-            0
-        }
-        val subTotal = harga * jumlahPesanan
-        total += subTotal
-        println("$reqMakan | $jumlahPesanan | $subTotal")
-    }
-    println("==================")
-    println("Total $total")
-
-
-//    if (reqMakan != null) {
-//        for (i in reqMakan.indices) {
-//            when (reqMakan[i]) {
-//                in num -> harga.get(num.indexOf(reqMakan[i]))
-//                else -> "Nomer tidak ada"
-//            }
-//            total += harga.get(num.indexOf(reqMakan[i]))
-//            amount += num.get(num.indexOf(reqMakan[i])).count()
-//        }
-        print("Tambah Menu? Y/N: ")
-        val inputReq: String? = readLine()
-        if(inputReq == "Y") {
-            Penjualan()
-
-        } else if(inputReq == "y"){
-            Penjualan()
-        }
-        else {
-            strukBill()
-        }
-
-//    }
-
-
-}
-
-
-fun strukBill(){
-
-    //    var strukMakan = reqMak.distinct()
-    fun struk (): String {
-        for (i in makanan.indices) {
-
+fun inputHarga(inputMakanan: String) {
+    do {
+        print("Masukan Harga:")
+        try {
+            val price = readLine()?.toInt() ?: throw NumberFormatException()
+            makanan[inputMakanan] = price
+            break
+        } catch (e:NumberFormatException){
             println("""
-                ${makanan[i].padEnd(10)}| $amount  | Rp.${harga[i]}
+                Input salah, yang anda masukan harus angka
             """.trimIndent())
         }
-        return(" ")
+    } while (true)
+}
+
+
+fun Penjualan():Boolean{
+
+    val pesanan = mutableMapOf<String, Int>()
+    println("============Tambah Makanan===============")
+    LihatMenu()
+    do {
+        print("Masukan nomer makanan: ")
+        val codes = try {
+            readLine()?.toInt() ?: - 1
+        } catch (e: NumberFormatException){
+            -1
+        }
+        if (codes in totalMakanan.keys) {
+            totalMakanan[codes]?.let { foodName ->
+                pesanan[foodName] = try {
+                    pesanan.getValue(foodName) + 1
+                } catch (e: NoSuchElementException) {
+                    1
+                }
+                println("${foodName.kapital()}, ditambahkan ke keranjang")
+            }
+        } else {
+            println("Code Makanan Salah")
+        }
+        println("Inging Menambahkan makanan lagi? (Y/N)")
+        val answer = readLine()?.lowercase()
+        if (answer != "y")
+            break
+    } while (true)
+
+    var total = 0
+
+    println("============Tambah Makanan===============")
+    println("${"Nama Makanan".padEnd(20)} | ${"Jumlah Pesanan".padEnd(20)} | ${"SubTotal".padEnd(20)}")
+    pesanan.forEach { namaMakanan, count ->
+        val harga = (makanan[namaMakanan] ?: 0) * count
+        total += harga
+        println("${namaMakanan.kapital().padEnd(20)} | ${count.toString().padEnd(20)} | ${"Rp $harga".padEnd(20)}")
     }
+    println("---------------------------------------")
+    println("Total Pembelian: Rp $total".padStart(50))
+    println("------------Terima Kasih---------------")
 
-    println("""
-                ==========================================================
-                Nama Makanan              | Jumlah        | Harga
-                ==========================================================
-    """.trimIndent())
-
-    println("""
-        ${struk()}
-    """.trimIndent())
-
-    println("""
-                ==========================================================
-                Total Harga : $total
-    """.trimIndent())
-
-    print("Balik ke Menu(Y/N) : ")
-    val jikaInput: String? = readLine()
-    if (jikaInput == "Y"){
-        Menu()
-    } else if (jikaInput == "y"){
-        Menu()
-    } else {
-        Keluar()
-    }
-
+    return false
 }
 
 fun Keluar(){
