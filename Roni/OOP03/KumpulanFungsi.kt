@@ -79,14 +79,6 @@ class Fungsi {
                 if ((pilihNo_makanan == menuJual[i].nomor) && (pesananUser == 0)) {
                     menuJual[i].jumlah =  menuJual[i].jumlah + 1
                     pesananUser = pesananUser + 1
-                } else if ((pilihNo_makanan == menuJual[i].nomor) && (pesananUser >= 1)) {
-                    // cek apakah ada makanan yg sama
-                    for (j in 0..menuJual.size - 1) {
-                        if (pilihNo_makanan == menuJual[j].nomor) {
-                            menuJual[j].jumlah =  menuJual[j].jumlah + 1
-                            break
-                        }
-                    }
                 }
             }
             println("Apakah anda ingin menambah pesanan ?")
