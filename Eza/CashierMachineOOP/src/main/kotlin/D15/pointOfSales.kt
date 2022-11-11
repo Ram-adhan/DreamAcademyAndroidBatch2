@@ -63,12 +63,6 @@ class MesinKasir {
                 print("Masukan harga terbaru: ")
                 try {
                     val price = readLine()?.toInt() ?: throw NumberFormatException()
-//                    dataMakanan.forEach{
-//                        if (it.name == makanan.name){
-//                            it.price = price
-//                            return@forEach
-//                        }
-//                    }
                     val indexHarga = dataMakanan.indexOf(food)
                     dataMakanan.removeAt(indexHarga)
                     food.price = price
@@ -86,7 +80,7 @@ class MesinKasir {
             val answer = readLine() ?: ""
             if (answer.lowercase() == "y") {
                 updateHarga(existingMakanan)
-                print("Harga berhasil diupdate")
+                println("Harga berhasil diupdate")
             } else {
                 print("Baiklah")
             }
@@ -98,12 +92,11 @@ class MesinKasir {
             makanan.price = inputPrice
             dataMakanan.add(makanan)
         }
-        if(inputNamaMakanan.lowercase().isNotBlank()){
-        }
         return false
     }
 
     fun Penjualan(): Boolean {
+        showMenu()
         var exit = false
         while(exit != true){
             println("============Tambah Makanan===============")
@@ -126,30 +119,30 @@ class MesinKasir {
             } ?: true
         }
         while (exit == true){
-            printBill()
+            struk()
             exit = false
         }
         return true
 
     }
 
-    fun printBill(){
-        var subTotal = 0
+    fun struk(){
+        var harga = 0
         var total = 0
         fun panggilPesan(): String{
             for (makanan in totalMakanan.keys){
                 val dataMakanan = dataMakanan.find { it.id == makanan }
-                subTotal = (dataMakanan?.price ?: 0) * try{
+                harga = (dataMakanan?.price ?: 0) * try{
                     totalMakanan.getValue(makanan)
                 } catch(e: NoSuchElementException){
                     0
                 }
-                total += subTotal
+                total += harga
 
                 if(totalMakanan.getValue(makanan) > 0){
                     if (dataMakanan != null) {
                         println("""
-                                    ${dataMakanan.name.kapital().padEnd(22)} ${totalMakanan.getValue(makanan).toString().padEnd(20)} Rp.$subTotal
+                                    ${dataMakanan.name.kapital().padEnd(22)} ${totalMakanan.getValue(makanan).toString().padEnd(20)} Rp.$harga
                                 """.trimIndent())
                     }
                 }
@@ -169,6 +162,9 @@ class MesinKasir {
         println("---------------------------------------")
         println("Total Pembelian: Rp $total".padStart(30))
         println("------------Terima Kasih---------------")
+        totalMakanan.clear()
+        run()
+
     }
 
 }
