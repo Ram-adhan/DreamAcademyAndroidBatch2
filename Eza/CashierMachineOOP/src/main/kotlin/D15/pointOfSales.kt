@@ -1,15 +1,14 @@
+
 class MesinKasir {
     var dataMakanan = mutableListOf(
         Food(1, "steak", 10000),
         Food(2, "spaghetti", 20000),
         Food(3,"burger",15000)
     )
-    var totalMakanan = mutableMapOf<Int, String>()
+    var totalMakanan = mutableMapOf<Int, Int>()
+    var makanan: Food = Food()
 
     fun run() {
-        dataMakanan.onEachIndexed { index, (keys) ->
-            totalMakanan[index + 1] = keys.toString()
-        }
         var exit = false
         do {
             println("""
@@ -54,7 +53,7 @@ class MesinKasir {
     fun TambahMenu(): Boolean {
         println("============Tambah Makanan===============")
         print("Silahkan masukan nama makanan: ")
-        var makanan: Food = Food()
+
         val inputNamaMakanan = readLine()?.lowercase() ?: ""
         val existingMakanan = dataMakanan.find {
             it.name == inputNamaMakanan
@@ -64,6 +63,12 @@ class MesinKasir {
                 print("Masukan harga terbaru: ")
                 try {
                     val price = readLine()?.toInt() ?: throw NumberFormatException()
+//                    dataMakanan.forEach{
+//                        if (it.name == makanan.name){
+//                            it.price = price
+//                            return@forEach
+//                        }
+//                    }
                     val indexHarga = dataMakanan.indexOf(food)
                     dataMakanan.removeAt(indexHarga)
                     food.price = price
@@ -97,48 +102,73 @@ class MesinKasir {
         }
         return false
     }
-    fun Penjualan():Boolean{
 
-        val pesanan = mutableMapOf<String, Int>()
-        println("============Tambah Makanan===============")
-        do {
+    fun Penjualan(): Boolean {
+        var exit = false
+        while(exit != true){
+            println("============Tambah Makanan===============")
             print("Masukan nomer makanan: ")
-            val codes = try {
-                readLine()?.toInt() ?: - 1
-            } catch (e: NumberFormatException){
-                -1
-            }
-            if (codes in totalMakanan.keys) {
-                totalMakanan[codes]?.let { foodName ->
-                    pesanan[foodName] = try {
-                        pesanan.getValue(foodName) + 1
-                    } catch (e: NoSuchElementException) {
-                        1
-                    }
-                    println("${foodName.kapital()}, ditambahkan ke keranjang")
+            val makanan = readLine()?.toInt()?: ""
+            val indexMakanan = dataMakanan.indexOfFirst { it.id == makanan }
+            if(indexMakanan >= 0) {
+                if (makanan in totalMakanan.keys){
+                    totalMakanan[makanan as Int] = (totalMakanan.getValue(makanan) ?: 0) + 1
+                }else {
+                    totalMakanan[makanan as Int] = 1
                 }
-            } else {
-                println("Code Makanan Salah")
+            } else{
+                println("Makanan tidak ada")
             }
-            println("Inging Menambahkan makanan lagi? (Y/N)")
-            val answer = readLine()?.lowercase()
-            if (answer != "y")
-                break
-        } while (true)
 
-        var total = 0
-//        val indexHarga = dataMakanan.indexOf(food)
-        println("============Tambah Makanan===============")
-        println("${"Nama Makanan".padEnd(20)} | ${"Jumlah Pesanan".padEnd(20)} | ${"SubTotal".padEnd(20)}")
-        pesanan.forEach { namaMakanan, count ->
-            val harga = ( pesanan[namaMakanan]?: 0) * count
-            total += harga
-            println("${namaMakanan.kapital().padEnd(20)} | ${count.toString().padEnd(20)} | ${"Rp $harga".padEnd(20)}")
+            print("Inging Menambahkan makanan lagi? (Y/N) ")
+            exit = readLine()?.let{
+                it.kapital() == "N"
+            } ?: true
         }
+        while (exit == true){
+            printBill()
+            exit = false
+        }
+        return true
+
+    }
+
+    fun printBill(){
+        var subTotal = 0
+        var total = 0
+        fun panggilPesan(): String{
+            for (makanan in totalMakanan.keys){
+                val dataMakanan = dataMakanan.find { it.id == makanan }
+                subTotal = (dataMakanan?.price ?: 0) * try{
+                    totalMakanan.getValue(makanan)
+                } catch(e: NoSuchElementException){
+                    0
+                }
+                total += subTotal
+
+                if(totalMakanan.getValue(makanan) > 0){
+                    if (dataMakanan != null) {
+                        println("""
+                                    ${dataMakanan.name.kapital().padEnd(22)} ${totalMakanan.getValue(makanan).toString().padEnd(20)} Rp.$subTotal
+                                """.trimIndent())
+                    }
+                }
+            }
+            return " "
+        }
+
+        println("""
+            "============Struk Makanan==============="
+            ${"Nama Makanan".padEnd(20)} | ${"Jumlah Pesanan".padEnd(20)} | ${"SubTotal".padEnd(20)}
+        """.trimIndent())
+
+        println("""
+            ${panggilPesan()}
+        """.trimIndent())
+
         println("---------------------------------------")
-        println("Total Pembelian: Rp $total".padStart(50))
+        println("Total Pembelian: Rp $total".padStart(30))
         println("------------Terima Kasih---------------")
-        return false
     }
 
 }
