@@ -69,7 +69,7 @@ akan di print hasilnya di console
 //    pembagianAngkaDua = readLine()!!.toInt()
 //    fun pembagian(): Int = pembagianAngkaSatu / pembagianAngkaDua
 //    println("Hasil = ${pembagian()}")
-//
+
 //    println("++++++++++++++++++++++++++++++++++++++++++++")
 //    println("INPUT MODULUS")
 //    println("++++++++++++++++++++++++++++++++++++++++++++")
