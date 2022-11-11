@@ -59,7 +59,6 @@ class Fungsi {
     }
 
     fun penjualan (menu: List<Makanan>) {
-        var pesananUser = 0
         val menuJual: List<Makanan> = menu
         var totalPesanan = 0
         // sinkronisasi, memberi nomor, dan reset pada menu yang akan dijual
@@ -76,7 +75,7 @@ class Fungsi {
             val pilihNo_makanan = readLine()!!.toInt()
             for (i in 0..menuJual.size - 1) {
                 // pertama kali user input makanan
-                if ((pilihNo_makanan == menuJual[i].nomor) && (pesananUser == 0)) {
+                if (pilihNo_makanan == menuJual[i].nomor) {
                     menuJual[i].jumlah =  menuJual[i].jumlah + 1
                     pesananUser = pesananUser + 1
                 }
